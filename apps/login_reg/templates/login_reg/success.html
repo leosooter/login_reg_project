@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'login_reg/css/style.css' %}">
+    <title>Login Registration</title>
+  </head>
+  <body>
+
+    <h1>Success</h1>
+    <h3>Hello {% for user in users %}{% if user.id == request.session.login_id %}<span>{{user.first_name}}</span>{% endif %}{% endfor %}</h3>
+    <a href="/account">Edit Account</a><a href="/logout">Logout</a>
+    <h3>Information for logged-in users only:</h3>
+    {% for user in users %}
+      <div class="user_info">
+        <h4>{{user.first_name}} {{user.last_name}}: <em>{{user.email}}</em></h4>
+        <form class="delete_form" action="/delete/{{user.id}}" method="post">
+          {% csrf_token %}
+          <input class="submit" type="submit" name="submit" value="Delete">
+        </form>
+      </div>
+    {% endfor %}
+  </body>
+</html>

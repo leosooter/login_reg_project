@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'login_reg/css/style.css' %}">
+    <title>Login Registration</title>
+  </head>
+  <body>
+    <h1>Account</h1>
+    <form class="form" action="{%url 'login_reg_update' %}" method="post">
+      {% csrf_token %}
+      <!-- I perfer this ugly inline error note loop format to one that looks prettier but takes up 5 lines -->
+      <p class="error" >{% for message in messages %}{% if message.extra_tags == 'first_name' %}{{message}}{% endif %}{% endfor %}</p>
+      <!-- I am using a 'text' rather than 'email' input to test backend validations-->
+      <input type="text" name="first_name" placeholder="First Name" value="{{request.session.user_info.first_name}}" >
+
+      <p class="error" >{% for message in messages %}{% if message.extra_tags == 'last_name' %}{{message}}{% endif %}{% endfor %}</p>
+      <input type="text" name="last_name" placeholder="Last Name" value="{{request.session.user_info.last_name}}">
+
+      <p class="error" >{% for message in messages %}{% if message.extra_tags == 'email' %}{{message}}{% endif %}{% endfor %}</p>
+      <input type="text" name="email" placeholder="Email" value="{{request.session.user_info.email}}">
+
+      <p class="error" >{% for message in messages %}{% if message.extra_tags == 'birthday' %}{{message}}{% endif %}{% endfor %}</p>
+      <input type="date" name="birthday" placeholder="Birthday" value="{{request.session.user_info.birthday}}">
+
+      <input class="submit" type="submit" name="submit" value="Update"> <a class="cancel" href="/success">Cancel</a>
+    </form>
+  </body>
+</html>

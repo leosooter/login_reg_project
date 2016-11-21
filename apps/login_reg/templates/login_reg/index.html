@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'login_reg/css/style.css' %}">
+
+    <title>Login Registration</title>
+  </head>
+  <body>
+    <h1>Login Registration</h1>
+    <h3>Register</h3>
+    <form class="form" action="{%url 'login_reg_register' %}" method="post">
+      {% csrf_token %}
+      <!-- I perfer this ugly error note loop format to one that looks prettier but takes up 5 lines -->
+      <p class="error" >{% for message in messages %}{% if message.extra_tags == 'first_name' %}{{message}}{% endif %}{% endfor %}</p>
+      <!-- I am using a 'text' rather than 'email' input to test backend validations-->
+      <input type="text" name="first_name" placeholder="First Name" value="{% for message in messages %}{% if message.extra_tags == 'first_name_value' %}{{message}}{% endif %}{% endfor %}" >
+      <p class="error" >{% for message in messages %}{% if message.extra_tags == 'last_name' %}{{message}}{% endif %}{% endfor %}</p>
+      <input type="text" name="last_name" placeholder="Last Name" value="{% for message in messages %}{% if message.extra_tags == 'last_name_value' %}{{message}}{% endif %}{% endfor %}">
+      <p class="error" >{% for message in messages %}{% if message.extra_tags == 'email' %}{{message}}{% endif %}{% endfor %}</p>
+      <input type="text" name="email" placeholder="Email" value="{% for message in messages %}{% if message.extra_tags == 'email_value' %}{{message}}{% endif %}{% endfor %}">
+      <p class="error" >{% for message in messages %}{% if message.extra_tags == 'birthday' %}{{message}}{% endif %}{% endfor %}</p>
+      <input type="date" name="birthday" placeholder="Birthday" value="{% for message in messages %}{% if message.extra_tags == 'birthday_value' %}{{message}}{% endif %}{% endfor %}">
+      <p class="guide" >Password must be at least 8 characters long with at least one capital and at least one number</p>
+      <p class="error" >{% for message in messages %}{% if message.extra_tags == 'password' %}{{message}}{% endif %}{% endfor %}</p>
+      <input type="password" name="password" placeholder="Password" value="">
+      <p class="error" >{% for message in messages %}{% if message.extra_tags == 'c_password' %}{{message}}{% endif %}{% endfor %}</p>
+      <input type="password" name="c_password" placeholder="Confirm Password" value="">
+      <input class="submit" type="submit" name="submit" value="Register">
+    </form>
+    <h3>Login</h3>
+    <form class="login_form" action="{%url 'login_reg_login' %}" method="post">
+      {% csrf_token %}
+      <!-- I am using a 'text' rather than 'email' input to test backend validations-->
+      <p class="error" >{% for message in messages %}{% if message.extra_tags == 'login_email' %}{{message}}{% endif %}{% endfor %}</p>
+      <input type="text" name="login_email" placeholder="Email" value="">
+      <p class="error" >{% for message in messages %}{% if message.extra_tags == 'login_password' %}{{message}}{% endif %}{% endfor %}</p>
+      <input type="password" name="login_password" placeholder="Password" value="">
+      <input class="submit" type="submit" name="submit" value="Login">
+    </form>
+  </body>
+</html>

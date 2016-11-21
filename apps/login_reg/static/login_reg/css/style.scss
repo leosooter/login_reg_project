@@ -1,0 +1,39 @@
+body{
+  padding: 30px;
+}
+a{
+  display: inline-block;
+  margin-right: 30px;
+}
+form{
+  input{
+    display: block;
+    margin-top: -13px;
+  }
+}
+.guide{
+  color: rgb(108, 108, 108);
+  margin-bottom: -5px;
+}
+.error{
+  height: 16px;
+  margin-top: 2px;
+  color: rgb(224, 108, 12);
+}
+.submit{
+  margin-top: 10px;
+  display: inline-block;
+}
+.cancel{
+  margin-left: 20px;
+}
+.user_info{
+  width: 50%;
+  min-width: 400px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid black;
+  p{
+    margin-left: 20px;
+  }
+}
