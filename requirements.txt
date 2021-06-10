@@ -1,6 +1,6 @@
 bcrypt==3.1.1
 cffi==1.9.1
-Django==1.10.3
+Django==2.2.24
 django-extensions==1.7.4
 extensions==0.4
 pycparser==2.17
